@@ -1,8 +1,7 @@
 package com.mdxam.notes.domain
+import javax.inject.Inject
 
-import kotlinx.coroutines.flow.Flow
-
-class SwitchPinnedStatusUseCase(
+class SwitchPinnedStatusUseCase @Inject constructor(
     private val repository: NotesRepository
 ) {
     suspend operator fun invoke(noteId: Int) {

@@ -1,10 +1,6 @@
 package com.mdxam.notes.presentation.navigation
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -61,50 +57,50 @@ sealed interface Screen{
 }
 
 
-@RequiresApi(Build.VERSION_CODES.O)
-@Composable
-fun CustomNavGraph(){
-
-    val screen = remember {mutableStateOf<CustomScreen>(CustomScreen.Notes)}
-
-    when(val currentScreen = screen.value){
-        CustomScreen.CreateNote -> {
-            CreateNoteScreen(
-                onFinished = {
-                    screen.value = CustomScreen.Notes
-                }
-            )
-        }
-        is CustomScreen.EditNote -> {
-            EditNoteScreen(
-                noteId = currentScreen.noteId,
-                onFinished = {
-                    screen.value = CustomScreen.Notes
-                }
-            )
-        }
-        CustomScreen.Notes -> {
-            NotesScreen(
-                onNoteClick = {
-                    screen.value = CustomScreen.EditNote(it.id)
-                },
-                onAddNoteClick = {
-                    screen.value = CustomScreen.CreateNote
-                }
-            )
-        }
-    }
-
-}
-
-
-sealed interface CustomScreen{
-
-    data object Notes: CustomScreen
-
-    data object CreateNote: CustomScreen
-
-    data class EditNote(
-        val noteId: Int
-    ): CustomScreen
-}
+//@RequiresApi(Build.VERSION_CODES.O)
+//@Composable
+//fun CustomNavGraph(){
+//
+//    val screen = remember {mutableStateOf<CustomScreen>(CustomScreen.Notes)}
+//
+//    when(val currentScreen = screen.value){
+//        CustomScreen.CreateNote -> {
+//            CreateNoteScreen(
+//                onFinished = {
+//                    screen.value = CustomScreen.Notes
+//                }
+//            )
+//        }
+//        is CustomScreen.EditNote -> {
+//            EditNoteScreen(
+//                noteId = currentScreen.noteId,
+//                onFinished = {
+//                    screen.value = CustomScreen.Notes
+//                }
+//            )
+//        }
+//        CustomScreen.Notes -> {
+//            NotesScreen(
+//                onNoteClick = {
+//                    screen.value = CustomScreen.EditNote(it.id)
+//                },
+//                onAddNoteClick = {
+//                    screen.value = CustomScreen.CreateNote
+//                }
+//            )
+//        }
+//    }
+//
+//}
+//
+//
+//sealed interface CustomScreen{
+//
+//    data object Notes: CustomScreen
+//
+//    data object CreateNote: CustomScreen
+//
+//    data class EditNote(
+//        val noteId: Int
+//    ): CustomScreen
+//}
